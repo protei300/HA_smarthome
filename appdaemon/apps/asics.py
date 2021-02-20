@@ -84,8 +84,6 @@ class Asics(hass.Hass):
             "_ant_name": "antminer",
         }
         
-        
-
         headers = {'Content-Type': 'application/x-www-form-urlencoded'}        
         http_path = f'http://{self.BASE_IP}{IP}/cgi-bin/set_miner_conf_custom.cgi'
         try: 
