@@ -1,0 +1,315 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Дом на озере
+  # Location required to calculate the time the sun rises and sets
+  latitude: 55.5389
+  longitude: 60.4190
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 200
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: Asia/Yekaterinburg
+  # Customization file
+  customize: !include customize.yaml
+  auth_providers:
+   - type: homeassistant
+#   - type: legacy_api_password
+#     api_password: !secret http_password
+
+
+# Show links to resources in log and frontend
+#introduction:
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+system_health:
+
+logger:
+  default: error
+  logs:
+    custom_components.mitemp_bt: warning
+    homeassistant.components.xiaomi_aqara: debug
+    homeassistant.components.device_tracker: error
+
+
+http:
+  # Secrets are defined in the file secrets.yaml
+  
+  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+  # base_url: example.duckdns.org:8123
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+recorder:
+  include:
+    domains:
+      - sensor
+      - switch
+      - person
+      - variable
+    entities:
+      - group.who_in_home
+  exclude:
+    entities:
+      - sensor.memory_free
+      - sensor.last_boot
+  auto_purge: false
+  commit_interval: 10
+
+  
+  
+
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+
+# Text to speech
+tts:
+  - platform: google_translate
+    service_name: google_say
+
+# Cloud
+cloud:
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+notify: !include notifys.yaml
+sensor: !include sensors.yaml
+variable: !include variable.yaml
+climate: !include climate.yaml
+ble_monitor: !include ble_sensors.yaml
+
+panel_iframe:
+  tasmoadmin:
+    title: TasmoAdmin
+    icon: mdi:lightbulb-on
+    url: http://192.168.1.46:9541/
+
+
+telegram_bot:
+  - platform: polling
+    api_key: !secret api_bot_telegram
+    allowed_chat_ids:
+      - 418198005
+#    proxy_url: socks5://s5.priv.opennetwork.cc:1080
+#    proxy_params:
+#        username: "v3_418198005"
+#        password: kcIrdLgF
+
+      
+device_tracker:
+#  - platform: keenetic_ndms2
+#    host: 192.168.1.1
+#    username: !secret zyxel_name
+#    password: !secret zyxel_password
+#    interval_seconds: 10
+#    consider_home: 300
+  - platform: nmap_tracker
+    hosts: 
+      - 192.168.1.90
+      - 192.168.1.91
+      - 192.168.1.92
+      - 192.168.1.93
+#      - 192.168.1.0/24
+    interval_seconds: 10
+    consider_home: 300
+    
+
+
+
+  
+
+
+    
+    
+#Слайдер температуры
+
+input_number:
+  slider_target_temp:
+    name: "Целевая температура"
+    initial: 6
+    min: 0
+    max: 35
+    step: 1
+  slider_temp_delta:
+    name: "Температурная дельта"
+    initial: 1
+    min: 0.1
+    max: 5
+    step: 0.1
+  slider_antifreeze:
+    name: "защита от замерзания"
+    
+    min: 0
+    max: 10
+    step: 0.1
+  slider_temp_pump:
+    name: "Температура включения насоса"
+    
+    min: 0
+    max: 50
+    step: 0.5
+  
+  slider_oil_pump:
+    name: "Температура включения насоса масла"
+    
+    min: 0
+    max: 50
+    step: 0.5
+  
+  
+  slider_antifreeze_hold:
+    name: "Температура теплоносителя для поддержания"
+    min: 0
+    max: 60
+    step: 0.5
+  slider_antifreeze_hold_delta:
+    name: "Дельта теплоносителя"
+    min: 0
+    max: 10
+    step: 0.1
+#########################
+######################### Режимы котла ############################
+
+input_select:
+  thermostat_type:
+    name: Режим обогрева
+    options:
+      - По температуре ОЖ
+      - По температуре в комнате
+      - Асики по комнатной температуре
+    icon: mdi:radiator
+
+
+
+input_boolean:
+  thermostat_to_use:
+    name: Какой термостат использовать
+    
+  heater_on:
+    name: Обогрев котлом
+
+  
+  antifreeze_temp_auto_set:
+    name: Автоматический расчет температуры антифриза
+    
+  winter_mode:
+    name: Зимний режим
+
+  asics_main_demand:
+    name: Основной обогрев - 1
+    
+  asics_main_demand_2:
+    name: Основной обогрев - 2
+
+  asics_support_demand:
+    name: Поддерживающий обогрев
+    
+
+
+    
+    
+weather:
+  - platform: darksky
+    api_key: 825f0893837d1d37afe8e12493549197
+    units: si
+    mode: daily
+    name: dark_sky
+
+media_player:
+  - platform: philips_js
+    host: 192.168.1.20
+
+
+################# Статистика потребления ######################
+utility_meter:
+  asics1_monthly:
+    source: sensor.sonoff_pow_2_energy_total_2
+    cycle: monthly
+
+  asics2_monthly:
+    source: sensor.sonoff_pow_3_energy_total
+    cycle: monthly
+
+  asics3_monthly:
+    source: sensor.sonoff_pow_4_energy_total
+    cycle: monthly
+
+  boiler_monthly:
+    source: sensor.sonoff_pow_1_energy_total
+    cycle: monthly
+
+  asics1_monthly_ago:
+    source: sensor.sonoff_pow_2_energy_total_2
+    cycle: monthly
+    offset: 
+      days: 30
+
+  asics2_monthly_ago:
+    source: sensor.sonoff_pow_3_energy_total
+    cycle: monthly
+    offset: 
+      days: 30
+
+  asics3_monthly_ago:
+    source: sensor.sonoff_pow_4_energy_total
+    cycle: monthly
+    offset: 
+      days: 30
+
+  boiler_monthly_ago:
+    source: sensor.sonoff_pow_1_energy_total
+    cycle: monthly
+    offset: 
+      days: 30
+
+
+################# система качества питания сервера ######################
+binary_sensor:
+  - platform: rpi_power
+
+
+
+
+
+#  - platform: openweathermap
+#    api_key: 3d413df9edae0a2a1e64795ca361ac58
+
+
+#influxdb:
+#  host: 192.168.1.46
+#  port: 8086
+#  database: homeassistant
+#  username: homeassistant
+#  password: !secret influx_db
+#  max_retries: 3
+#  default_measurement: state
+
+
+
+

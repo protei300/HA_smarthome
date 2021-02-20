@@ -1,0 +1,16 @@
+
+smtp_leakage:
+  alias: smtp_leakage
+  sequence:
+  - service: notify.smtp
+    data:
+      title: Протечка воды в подвале
+      message: Протекла вода в подвале
+
+smtp_low_temp:
+  alias: smtp_low_temp
+  sequence:
+  - data:
+      message: Низкая температура в подвале или в ванной
+      title: Низкая температура
+    service: notify.smtp

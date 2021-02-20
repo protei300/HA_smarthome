@@ -1,0 +1,19 @@
+rounding: True
+decimals: 1
+period: 60
+log_spikes: False
+use_median: True
+active_scan: False
+hci_interface: 0
+batt_entities: True
+discovery: False
+devices:
+  - mac: 'A4:C1:38:93:18:50'
+    encryption_key: 'f23e6919d566e5890463db3314f34a47'
+    name: 'Living_room'
+  - mac: 'A4:C1:38:62:DF:3E'
+    encryption_key: '67fd513760c1d798d05cc7fb7e5d7d5d'
+    name: 'Outside'
+  - mac: 'A4:C1:38:E0:AB:33'
+    encryption_key: '0a886e88cfa62c841a36e5fcb62f9eb9'
+    name: 'Billyard'

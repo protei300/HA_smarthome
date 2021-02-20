@@ -1,0 +1,107 @@
+####### CLIMATE###########################
+  - platform: generic_thermostat
+    name: heater_thermostat
+    heater: input_boolean.heater_on
+    target_sensor: sensor.ble_temperature_living_room
+    min_temp: 4
+    max_temp: 25
+    ac_mode: False
+    cold_tolerance: 0.0
+    hot_tolerance: 0.1
+    min_cycle_duration:
+      seconds: 5
+    away_temp: 6
+
+  - platform: generic_thermostat
+    name: heater_preserve_antifreeze
+    heater: switch.Sonoff_Basic_1
+    target_sensor: sensor.sonoff_th16_3_temp
+    min_temp: 0
+    max_temp: 70
+    ac_mode: False
+    cold_tolerance: 7.0
+    hot_tolerance: 0.0
+    min_cycle_duration:
+      seconds: 30
+    away_temp: 0
+    
+    
+################## ASICS ################################## 
+  - platform: generic_thermostat
+    name: asics_thermostat_support
+    heater: switch.sonoff_pow_2
+    target_sensor: sensor.sonoff_th16_2_temp
+    min_temp: 10
+    max_temp: 70
+    ac_mode: False
+    cold_tolerance: 5.0
+    hot_tolerance: 0
+    min_cycle_duration:
+      seconds: 30
+    away_temp: 0
+ 
+  - platform: generic_thermostat
+    name: asics_thermostat_main
+    heater: switch.sonoff_pow_3
+    target_sensor: sensor.sonoff_th16_2_temp
+    min_temp: 10
+    max_temp: 70
+    ac_mode: False
+    cold_tolerance: 5.0
+    hot_tolerance: 0
+    min_cycle_duration:
+      seconds: 30
+    away_temp: 0
+
+  - platform: generic_thermostat
+    name: asics_thermostat_main_2
+    heater: switch.sonoff_pow_4
+    target_sensor: sensor.sonoff_th16_2_temp
+    min_temp: 10
+    max_temp: 70
+    ac_mode: False
+    cold_tolerance: 5.0
+    hot_tolerance: 0
+    min_cycle_duration:
+      seconds: 30
+    away_temp: 0
+
+################# ASICS in room #################################
+  - platform: generic_thermostat
+    name: asics_thermostat_temp
+    heater: input_boolean.asics_support_demand
+    target_sensor: sensor.ble_temperature_living_room
+    min_temp: 2
+    max_temp: 30
+    ac_mode: False
+    cold_tolerance: 0.5
+    hot_tolerance: 0
+    min_cycle_duration:
+      seconds: 30
+    away_temp: 0
+
+  - platform: generic_thermostat
+    name: asics_thermostat_main_temp
+    heater: input_boolean.asics_main_demand
+    target_sensor: sensor.ble_temperature_living_room
+    min_temp: 2
+    max_temp: 30
+    ac_mode: False
+    cold_tolerance: 0.5
+    hot_tolerance: 0
+    min_cycle_duration:
+      seconds: 30
+    away_temp: 0
+
+  - platform: generic_thermostat
+    name: asics_thermostat_main_temp_2
+    heater: input_boolean.asics_main_demand_2
+    target_sensor: sensor.ble_temperature_living_room
+    min_temp: 2
+    max_temp: 30
+    ac_mode: False
+    cold_tolerance: 0.5
+    hot_tolerance: 0
+    min_cycle_duration:
+      seconds: 30
+    away_temp: 0

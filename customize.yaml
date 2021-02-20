@@ -1,0 +1,134 @@
+group.all_lights: {}
+light.gateway_light_7811dcdc2b49:
+  friendly_name: Светильник
+sensor.weather_temperature:
+  friendly_name: Температура
+sensor.weather_symbol:
+  friendly_name: Ожидаемая погода
+sensor.weather_precipitation:
+  friendly_name: Обьем осадков
+  icon: mdi:water
+sensor.weather_wind_Speed:
+  friendly_name: Скорость ветра
+sensor.weather_pressure:
+  friendly_name: Атмосферное давление
+sensor.weather_wind_Direction:
+  friendly_name: Направление ветра
+sensor.weather_humidity:
+  friendly_name: Влажность
+sensor.weather_fog:
+  friendly_name: Вероятность тумана
+sun.sun:
+  friendly_name: Положение солнца
+sensor.temp_sensor_battery_low:
+  hidden: true
+sensor.leakage_sensor_battery_low:
+  hidden: true
+sensor.temperature_square1_sensor_battery_low:
+  hidden: true
+group.all_automations:
+  hidden: false
+switch.Sonoff1:
+  friendly_name: Реле насоса
+sensor.Sonoff1_Temp:
+  friendly_name: Температура у реле
+switch.Sonoff_T1_1:
+  friendly_name: Выключатель света
+  icon: mdi:lightbulb-on
+switch.Sonoff_T1_2:
+  friendly_name: Выключатель света
+  icon: mdi:lightbulb-on
+switch.Sonoff_T2_1_1:
+  friendly_name: Выключатель света
+  icon: mdi:lightbulb-on
+switch.Sonoff_T2_1_2:
+  friendly_name: Выключатель света
+  icon: mdi:lightbulb-on
+switch.Sonoff_T2_2_1:
+  friendly_name: Выключатель прожектора
+  icon: mdi:lightbulb-on
+switch.Sonoff_T2_2_2:
+  friendly_name: Выключатель диодной ленты
+  icon: mdi:lightbulb-on
+switch.Sonoff_Pow_1:
+  friendly_name: Нагреватель воды
+switch.Sonoff_TH16_3:
+  friendly_name: Насос отопления
+switch.Sonoff_Basic_1:
+  friendly_name: Котел отопления
+sensor.Sonoff_Pow_1_Energy_Yesterday:
+  friendly_name: Потребленная электроэнергия вчера
+sensor.Sonoff_Pow_1_Energy_Today:
+  friendly_name: Потребленная электроэнерегия сегодня
+sensor.Sonoff_Pow_1_Energy_Total:
+  friendly_name: Потребленная электроэнергия за все время
+sensor.Sonoff_Pow_1_Voltage:
+  friendly_name: Напряжение в сети
+sensor.Sonoff_Pow_1_Power:
+  friendly_name: Текущая мощность
+sensor.Sonoff_Pow_2_Energy_Yesterday:
+  friendly_name: Потребленная электроэнергия вчера
+sensor.Sonoff_Pow_2_Energy_Today:
+  friendly_name: Потребленная электроэнерегия сегодня
+sensor.Sonoff_Pow_2_Energy_Total:
+  friendly_name: Потребленная электроэнергия за все время
+sensor.Sonoff_Pow_2_Voltage:
+  friendly_name: Напряжение в сети
+sensor.Sonoff_Pow_2_Power:
+  friendly_name: Текущая мощность
+sensor.Sonoff_TH16_3_Temp:
+  friendly_name: Температура ОЖ
+weather.dark_sky:
+  friendly_name: Прогноз погоды
+switch.sonoff_pow_2_2:
+  friendly_name: Питание Асиков - 1
+switch.sonoff_pow_2_3:
+  friendly_name: Асик контур 1
+sensor.sonoff_pow_2_energy_power:
+  friendly_name: Асик-1 Мощность
+  unit_of_measurement: Вт
+sensor.sonoff_pow_2_energy_voltage:
+  friendly_name: Асик-1 Напряжение
+  unit_of_measurement: В
+sensor.sonoff_pow_2_energy_today:
+  friendly_name: Асик-1 сегодня
+  unit_of_measurement: кВтч
+sensor.asics_current_month:
+  friendly_name: Асик-1 за мес
+sensor.sonoff_pow_2_energy_total_2:
+  unit_of_measurement: кВтч
+sensor.sonoff_pow_2_energy_yesterday:
+  unit_of_measurement: кВт
+sensor.sonoff_pow_1_energy_today:
+  unit_of_measurement: кВт
+sensor.sonoff_pow_1_energy_total:
+  unit_of_measurement: кВт
+sensor.sonoff_pow_1_voltage:
+  unit_of_measurement: В
+sensor.sonoff_pow_3_energy_voltage:
+  friendly_name: Асик-2 Напряжение
+  unit_of_measurement: В
+sensor.sonoff_pow_3_energy_power:
+  friendly_name: Асик-2 Мощность
+  unit_of_measurement: Вт
+sensor.sonoff_pow_3_energy_today:
+  friendly_name: Асик-2 сегодня
+  unit_of_measurement: кВт
+sensor.sonoff_pow_3_energy_total:
+  friendly_name: Асик-2 всего
+  unit_of_measurement: кВт
+sensor.sonoff_pow_4_energy_power:
+  friendly_name: Асик-3 мощность
+  unit_of_measurement: Вт
+sensor.sonoff_pow_4_energy_voltage:
+  friendly_name: Асик-3 Напряжение
+  unit_of_measurement: В
+sensor.sonoff_pow_4_energy_today:
+  friendly_name: Асик-3 сегодня
+  unit_of_measurement: кВт
+variable.asic_133:
+  unit_of_measurement: TH
+sensor.asics1_monthly:
+  unit_of_measurement: кВт
+sensor.asics3_monthly:
+  unit_of_measurement: кВт

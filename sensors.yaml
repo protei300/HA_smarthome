@@ -1,0 +1,191 @@
+
+##### Погода от DarkSky   #######
+- platform: darksky
+  api_key: 825f0893837d1d37afe8e12493549197
+  monitored_conditions:
+    - summary
+    - icon
+    - precip_type
+    - precip_intensity
+    - precip_probability
+    - temperature
+    - apparent_temperature
+    - dew_point
+    - wind_speed
+    - wind_bearing
+    - cloud_cover
+    - humidity
+    - pressure
+    - visibility
+    - ozone
+    - hourly_summary
+    - daily_summary
+    - precip_intensity_max
+  language: ru
+  units: si
+  scan_interval: 
+    minutes: 5
+
+
+
+
+
+          
+
+
+  # Настройка давления в прогнозе погоды
+- platform: template
+  sensors:
+    weather_pressure_inhg:
+      friendly_name: 'Атмосферное давление'
+      value_template: "{{(states.sensor.weather_pressure.state|float|round(1) * 0.750063)|float|round(0)}}"
+      unit_of_measurement: 'мм.рт.ст.'
+
+# Настройка давления в датчике внутри дома
+- platform: template
+  sensors:
+    today_pressure_inhg:
+      friendly_name: 'Атмосферное давление'
+      value_template: "{{(states.sensor.pressure_square1.state|float|round(1) * 0.750063)|float|round(0)}}"
+      unit_of_measurement: 'мм.рт.ст'
+
+# Вычисление потребленных кВт*ч на котел
+- platform: template
+  sensors:
+    heater_power_consum:
+      friendly_name: 'Потребление за месяц на отопление'
+      value_template: '{{(states.sensor.heater_was_on_month.state|float * 9)|float|round(0)}}'
+      unit_of_measurement: 'кВтч'
+
+# Вычисление потребленных кВт*ч на котел в прошлом месяце
+- platform: template
+  sensors:
+    heater_power_consum:
+      friendly_name: 'Потребление за прошлый месяц на отопление'
+      value_template: '{{(states.sensor.heater_was_on_month_ago.state|float * 9)|float|round(0)}}'
+      unit_of_measurement: 'кВтч'
+
+
+##### Вычсиление потребленных кВт*ч на котел за период с 00:00 - 23:59
+- platform: template
+  sensors:
+      heater_power_consum_today:
+        friendly_name: 'Потребление за сегодня'
+        value_template: '{{(states.sensor.heater_was_on_today.state|float * 9)|float|round(0)}}'
+        unit_of_measurement: 'кВтч'
+
+##### Вычсиление потребленных кВт*ч на котел за период с 18:00 - 18:00 + 1 день
+- platform: template
+  sensors:
+      heater_power_consum_1_day_report:
+        friendly_name: 'Потребление за вчера с 18:00 до сегодня 18:00'
+        value_template: '{{(states.sensor.heater_was_on_1_day_for_report.state|float * 9)|float|round(0)}}'
+        unit_of_measurement: 'кВтч'
+ 
+ 
+#### Исторические данные потребления электричества за месяц на котел
+- platform: history_stats
+  name: heater_was_on_month
+  entity_id: switch.Sonoff_Basic_1
+  state: 'on'
+  type: time
+  start: '{{ now().replace(day=1).replace(hour=0).replace(minute=0).replace(second=0) }}'
+  end: '{{ now() }}'
+
+#### Исторические данные потребления электричества за прошлый месяц на котел
+- platform: history_stats
+  name: heater_was_on_month_ago
+  entity_id: switch.Sonoff_Basic_1
+  state: 'on'
+  type: time
+  start: '{{ (now().replace(day=1, hour=0, minute=0,second=0) - timedelta(days=1)).replace(day=1, hour=0, minute=0,second=0) }}'
+  end: '{{ now().replace(day=1, hour=0, minute=0,second=0) - timedelta(days=1) }}'
+
+
+### Исторические данные потребления электричества за сутки с 00:00 по 23:59 на котел
+
+- platform: history_stats
+  name: heater_was_on_today
+  entity_id: switch.Sonoff_Basic_1
+  state: 'on'
+  type: time
+  start: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
+  end: '{{ now() }}'
+  
+### Исторические данные потребления электричества за сутки с 18:00 до 18:00 +1 день на котел
+
+- platform: history_stats
+  name: heater_was_on_1_day_for_report
+  entity_id: switch.Sonoff_Basic_1
+  state: 'on'
+  type: time
+  duration: 
+    hours: 24
+  end: '{{ now().replace(hour=18).replace(minute=0).replace(second=0) }}'  
+  
+  
+###### Исторические данные потребления электричества за месяц на нагреватель воды
+
+
+      
+
+####### Сенсор для отслеживания расчетной температуры теплоносителя ###################
+- platform: template
+  sensors:
+    counted_antifreeze_temp:
+      friendly_name: "Расчетное значение температуры антифриза"
+      unit_of_measurement: '°C'
+      value_template: '{{ 0 }}'
+
+
+
+  
+- platform: rest
+  resource: https://pypi.python.org/pypi/homeassistant/json
+  name: hassio_update
+  value_template: '{{ value_json.info.version }}'
+  scan_interval: 3600
+  
+  
+  
+- platform: systemmonitor
+  resources:
+    - type: disk_use_percent
+      arg: /
+    - type: memory_free
+    - type: last_boot
+    - type: disk_free
+      arg: /
+    - type: ipv4_address
+      arg: wlan0
+    - type: processor_use
+    - type: processor_temperature
+    
+    
+#################### БЛОК-ЧЕЙН ##################################
+
+- platform: blockchain
+  addresses:
+    - '199SXX6igqmgJB1eAs1xdqgSvYB4GhtQNm'
+      
+
+- platform: bitcoin
+  currency: 'RUB'
+  display_options:
+    - exchangerate
+
+- platform: template
+  sensors: 
+    estimated_usd_ammount:
+      friendly_name: "Предполагаемая сумма в рублях"
+      value_template: '{{ (states.sensor.bitcoin_balance.state|float * states.sensor.exchange_rate_1_btc|float)|float|round(2)}}'
+      unit_of_measurement: 'RUB'
+      
+      
+############### TELEGRAM #############################3
+- platform: command_line
+  name: "Telegram Status"
+  command: sh /config/telegram.sh
+  
+  
+  

@@ -1,0 +1,62 @@
+- id: '1531673119175'
+  alias: water flood
+  trigger:
+  - entity_id: binary_sensor.water_leak_sensor_158d000233f53a
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - service: script.smtp_leakage
+  - data_template:
+      message: Протечка в подвале. Насос воды выключен
+      title: Протечка в подвале
+    service: notify.telegram
+  - data: {}
+    entity_id: switch.sonoff_th16_1
+    service: homeassistant.turn_off
+- id: '1531673119179'
+  alias: set_initial_sonoff_values
+  trigger:
+  - event: start
+    platform: homeassistant
+  action:
+  - data:
+      payload: '1'
+      topic: cmnd/sonoffs/SetOption19
+    service: mqtt.publish
+  - data:
+      payload: ''
+      topic: cmnd/sonoffs/state
+    service: mqtt.publish
+  - data:
+      payload: ''
+      topic: cmnd/sonoffs/power1
+    service: mqtt.publish
+  - data:
+      payload: ''
+      topic: cmnd/sonoffs/power2
+    service: mqtt.publish
+  - data:
+      payload: ''
+      topic: cmnd/Sonoff1/power
+    service: mqtt.publish
+- alias: update_notifications
+  trigger:
+  - platform: state
+    entity_id: sensor.hassio_update
+  action:
+  - delay: '24:00:00'
+  - service: notify.telegram
+    data_template:
+      title: Новое обновление Home assistant
+      message: Home Assistant {{ states.updater.updater.state }} доступен для скачивания
+- alias: Purge Database
+  trigger:
+    platform: time
+    at: 02:22:22
+  action:
+    service: recorder.purge
+    data:
+      keep_days: 30
+      repack: false

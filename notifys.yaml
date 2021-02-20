@@ -1,0 +1,17 @@
+- platform: telegram
+  name: telegram
+  chat_id: 418198005
+
+
+- platform: smtp
+  name: smtp
+  server: smtp.gmail.com
+  port: 587
+  timeout: 15
+  sender: protei30084@gmail.com
+  encryption: starttls
+  username: protei30084
+  password: aoamega1
+  recipient:
+    - protei300@gmail.com
+  sender_name: "Умный дом на озере"

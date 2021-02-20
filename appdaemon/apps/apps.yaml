@@ -1,0 +1,57 @@
+---
+settings:
+  module: settings
+  class: Settings
+  asics_pass: !secret asics_pass
+  
+global_modules:
+  - settings
+  
+in_out_home:
+  module: lights_on_when_home
+  class: Lights_on_when_home
+  switch:
+    - group.outside_light
+  global_dependencies: settings
+
+
+heater_toggle:
+  module: heaters
+  class: Set_heating_type
+  global_dependencies: settings
+  
+optimal_temp:
+  module: optimal_temp_antifreeze
+  class: Optimal_temp
+  
+daily_reporter:
+  module: information_reporter
+  class:  Daily_reporter
+  global_dependencies: settings
+
+  
+telegram_bot_reporter:
+  module: information_reporter
+  class: Telegram_bot
+  global_dependencies: settings
+
+  
+#db_correction:
+#  module: db_pow_correction
+#  class: DB_Correction
+ 
+asics_lib:
+  module: asics
+  class: Asics
+  global_dependencies: settings
+
+sensors_checker:
+  module: sensors_check
+  class: sonoff_checker
+  global_dependencies: settings
+
+  
+
+  
+
+

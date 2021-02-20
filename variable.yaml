@@ -1,0 +1,72 @@
+################# Асики ##################################
+  asic_133:
+    value: 0
+    attributes:
+      friendly_name: 'Asic-133'
+      icon: mdi:calculator
+      status: 'off'
+      blades: 0
+      board_t: 0
+      lstime: '00:00:00'
+      unit_of_measurement: 'TH'
+    restore: false
+
+  asic_134:
+    value: 0
+    attributes:
+      friendly_name: 'Asic-134'
+      icon: mdi:calculator
+      status: 'off'
+      blades: 0
+      board_t: 0
+      lstime: '00:00:00'
+      unit_of_measurement: 'TH'
+    restore: false
+
+  asic_135:
+    value: 0
+    attributes:
+      friendly_name: 'Asic-135'
+      icon: mdi:calculator
+      status: 'off'
+      blades: 0
+      board_t: 0
+      lstime: '00:00:00'
+      unit_of_measurement: 'TH'
+    restore: false
+
+  asic_136:
+    value: 0
+    attributes:
+      friendly_name: 'Asic-136'
+      icon: mdi:calculator
+      status: 'off'
+      board_t: 0
+      blades: 0
+      lstime: '00:00:00'
+      unit_of_measurement: 'TH'
+    restore: false
+
+  asic_137:
+    value: 0
+    attributes:
+      friendly_name: 'Asic-137'
+      icon: mdi:calculator
+      status: 'off'
+      blades: 0
+      board_t: 0
+      lstime: '00:00:00'
+      unit_of_measurement: 'TH'
+    restore: false
+
+  asic_138:
+    value: 0
+    attributes:
+      friendly_name: 'Asic-138'
+      icon: mdi:calculator
+      status: 'off'
+      board_t: 0
+      blades: 0
+      lstime: '00:00:00'
+      unit_of_measurement: 'TH'
+    restore: false

@@ -1,0 +1,43 @@
+Outside_Light:
+  name: Внешнее освещение
+  entities:
+  - switch.Sonoff_T1_1
+  - switch.Sonoff_T2_2_1
+  - switch.Sonoff_T2_2_2
+  
+ 
+
+Who_in_home:
+  name: Присутствие в доме
+  entities:
+    - person.vitalii_mi9
+    - person.olesia
+    - person.mama
+    
+
+
+Sensor_batteries_alert:
+  name: Низкий заряд батарии датчиков
+  entities:
+    - sensor.battery_child
+    - sensor.battery_flood
+    - sensor.battery_square1
+    - sensor.battery_parents
+    - sensor.battery_guest
+    - sensor.battery_toilet
+    - sensor.battery_living_room
+    
+Sensor_batteries:
+  name: Батареи датчиков
+  entities:
+    - sensor.battery_child
+    - sensor.battery_flood
+    - sensor.battery_square1
+    - sensor.battery_parents
+    - sensor.battery_guest
+    - sensor.battery_toilet
+    - sensor.battery_living_room
+    - sensor.ble_battery_living_room
+    - sensor.ble_battery_outside
+    - sensor.ble_battery_billyard
+    
