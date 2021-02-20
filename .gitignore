@@ -1,25 +1,53 @@
 # Example .gitignore file for your config dir.
 # An * ensures that everything will be ignored.
 
-*
-
-# You can whitelist files/folders with !, these will not be ignored.
-!*.yaml
-secrets.yaml
-known_devices.yaml
-
-!.gitignore
-!*.md
-!*.sh
-
 .cloud
 .git
 .storage
-/node-red
+configuration
+deps
+__pycache__
+*.pyc
+logs
+*.log
+*.uuid
+*.conf
+*.db
+*.db-journal
+*.log
+*.noload
+*.txt
+*.sqlite
+*.xml
+*.backup
+*.json
+www/icons
+www/floorplans
+www/community
+custom_components/hacs
+tts
+components
+*.pickle
+.pc-session
+google*.deb
+.homekit.state
+downloads
+.google.token
+install
 
-!appdaemon/
-!/appdaemon/apps
-!/appdaemon/apps/libs/asics.py
+/appdaemon/compiled
+/appdaemon/dashboards/
+blueprints
+node-red/
+
+known_devices.yaml
+secrets.yaml
+appdaemon.yaml
+ip_bans.yaml
+
+
+
+
 
 
 
