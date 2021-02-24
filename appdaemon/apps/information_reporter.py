@@ -18,7 +18,7 @@ class Daily_reporter(hass.Hass):
 #	        self.listen_state(self.battery_report, i);
         
     def status_report(self, kwargs):
-        msg = f"Время: {datetime.date.now().strftime(format='%Y-%m-%d %H:%M')}\n\n"
+        msg = f"Время: {datetime.datetime.now().strftime(format='%Y-%m-%d %H:%M')}\n\n"
         msg += f"Температура на улице {self.settings.outside_t}\n\n"
         msg += f"Температура в бильярдной {self.get_state(self.settings.billyard_t)}\n\n"
         msg += f"Температура в гостинной {self.settings.living_room_t}\n"

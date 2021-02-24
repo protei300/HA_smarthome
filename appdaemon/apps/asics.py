@@ -21,16 +21,16 @@ class Asics(hass.Hass):
 
     def initialize(self):
         
-        self.settings = self.get_app("settings")
+        self.LSTIME = 3
+        self.BROKEN_CHIPS_COEF = 0.95
         self.BASE_IP = "192.168.1."
+        
+        self.settings = self.get_app("settings")
         self.asic_blades = self.settings.asic_blades
-        
-        
         
         self.log('Starting Asics module')
         self.run_every(self.asics_auto_restart, datetime.datetime.now(), 60*5)
-        #self.get_miner_conf(133)
-        
+
    
     def change_power(self, IP, freq, autodownscale = "false"):
         auth = HTTPDigestAuth('root', self.settings.asics_pwd[IP])
@@ -261,6 +261,9 @@ class Asics(hass.Hass):
                         'chip_t': 0,
                         'board_t': 0,
                         'lstime': "00:00:00",
+                        'chips_6': 0,
+                        'chips_7': 0,
+                        'chips_8': 0,
                     }
                     asics_status[ip] = {
                         "climate_id": key,
@@ -268,6 +271,9 @@ class Asics(hass.Hass):
                         "blades": 0,
                         "chip_t": 0,
                         "board_t": 0,
+                        'chips_6': 0,
+                        'chips_7': 0,
+                        'chips_8': 0,
                         "lstime": datetime.datetime.strptime("00:00:00", "%H:%M:%S").time(),
                     }
                     self.call_service("variable/set_variable", variable = f'asic_{ip}', value=0.0, attributes = attributes)
@@ -295,14 +301,21 @@ class Asics(hass.Hass):
         blades_status = self.get_all_miners_status()
         for key in blades_status.keys():
             self.log(f"Checking {key}")
-            if blades_status[key]['blades'] < self.asic_blades[key] and blades_status[key]['blades']!=0 or blades_status[key]['lstime'].minute>2:
+            chips_sum = blades_status[key]['chips_6'] + blades_status[key]['chips_7'] + blades_status[key]['chips_8']
+            self.log(f"Chips : {chips_sum}")
+            if blades_status[key]['blades'] < self.asic_blades[key] and blades_status[key]['blades']!=0:
                 self.log(f"Asic {key} has {blades_status[key]['blades']}. Rebooting")
+                self.notify(f"Асик {key} видит {blades_status[key]['blades']} лезвий вместо необходимых {self.asic_blades[key]}. Перезагружаю", name = "telegram")
                 self.call_service("climate/turn_off", entity_id = blades_status[key]['climate_id'])
                 self.run_in(self.switch_boolean, 4*60, command = "climate/turn_on", boolean_var = blades_status[key]['climate_id'])
-                
-                
-                
-                #self.reboot_miner(f"192.168.1.{key}")
+            elif blades_status[key]['blades']!=0 and chips_sum < self.asic_blades[key] * 63 * self.BROKEN_CHIPS_COEF:
+                self.log(f"Asic {key} has {chips_num} chips. Rebooting")
+                self.notify(f"Асик {key} видит {chips_num} чипов. Делаю ребут Асика", name = "telegram")
+                self.reboot_miner(f"192.168.1.{key}")
+            elif blades_status[key]['lstime'].minute > self.LSTIME:
+                self.log(f"Asic {key}  didnt share for {blades_status[key]['lstime'].minute} minutes. Rebooting")
+                self.notify(f"Асик {key} не отправлял шар {blades_status[key]['lstime'].minute} минут. Делаю ребут Асика", name = "telegram")
+                self.reboot_miner(f"192.168.1.{key}")
         
     
     def switch_boolean(self, kwargs):
