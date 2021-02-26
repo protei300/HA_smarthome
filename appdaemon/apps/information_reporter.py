@@ -495,7 +495,7 @@ class Telegram_bot(hass.Hass):
             elif self.get_state(self.settings.asics_switch_1) == 'off':
                 msg = ['Асики на фазе 1 включены успешно', 'Асики на фазе 1 не включились']
                 self.switch_on_off('climate/turn_on','climate.asics_thermostat_support', user_id, msg, 
-                                'on', keyboard=keyboard)
+                                'heat', keyboard=keyboard)
         
         # Фаза 2    
         elif data_callback == '/asics_phase2_switch':
@@ -512,7 +512,7 @@ class Telegram_bot(hass.Hass):
             elif self.get_state(self.settings.asics_switch_2) == 'off':
                 msg = ['Асики на фазе 2 включены успешно', 'Асики на фазе 2 не включились']
                 self.switch_on_off('climate/turn_on','climate.asics_thermostat_main', user_id, msg, 
-                                'on', keyboard=keyboard)
+                                'heat', keyboard=keyboard)
 
         #### Фаза 3    
         elif data_callback == '/asics_phase3_switch':
@@ -529,7 +529,7 @@ class Telegram_bot(hass.Hass):
             elif self.get_state(self.settings.asics_switch_3) == 'off':
                 msg = ['Асики на фазе 3 включены успешно', 'Асики на фазе 3 не включились']
                 self.switch_on_off('climate/turn_on','climate.asics_thermostat_main_2', user_id, msg, 
-                                'on', keyboard=keyboard)
+                                'heat', keyboard=keyboard)
 
 
 

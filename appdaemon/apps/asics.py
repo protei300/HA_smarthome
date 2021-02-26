@@ -56,7 +56,7 @@ class Asics(hass.Hass):
             "_ant_nobeeper": "false",
             "_ant_notempoverctrl": "false",
             "_ant_fan_customize_switch": "true",
-            "_ant_fan_customize_value": "4",
+            "_ant_fan_customize_value": "3",
             "_ant_freq": f"{freq}",
             "_ant_freq1": "0",
             "_ant_freq2": "0",
@@ -309,9 +309,9 @@ class Asics(hass.Hass):
                 self.call_service("climate/turn_off", entity_id = blades_status[key]['climate_id'])
                 self.run_in(self.switch_boolean, 4*60, command = "climate/turn_on", boolean_var = blades_status[key]['climate_id'])
             elif blades_status[key]['blades']!=0 and chips_sum < self.asic_blades[key] * 63 * self.BROKEN_CHIPS_COEF:
-                self.log(f"Asic {key} has {chips_num} chips. Rebooting")
-                self.notify(f"Асик {key} видит {chips_num} чипов. Делаю ребут Асика", name = "telegram")
-                self.reboot_miner(f"192.168.1.{key}")
+                self.log(f"Asic {key} has {chips_sum} chips. Rebooting")
+                self.notify(f"Асик {key} видит {chips_sum} чипов. Делаю ребут Асика", name = "telegram")
+                self.reboot_miner(key)
             elif blades_status[key]['lstime'].minute > self.LSTIME:
                 self.log(f"Asic {key}  didnt share for {blades_status[key]['lstime'].minute} minutes. Rebooting")
                 self.notify(f"Асик {key} не отправлял шар {blades_status[key]['lstime'].minute} минут. Делаю ребут Асика", name = "telegram")

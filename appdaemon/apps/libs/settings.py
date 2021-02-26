@@ -29,22 +29,22 @@ class Settings(hass.Hass):
         self.asics_switch_3 = 'switch.sonoff_pow_4'
         
         self.asics_thermostat_support = 'climate.asics_thermostat_temp'
-        self.asics_thermostat_main_1 = 'climate.asics_thermostat_main_temp'
+        self.asics_thermostat_main = 'climate.asics_thermostat_main_temp'
         self.asics_thermostat_main_2 = 'climate.asics_thermostat_main_temp_2'
         
-        self.asics_climate_support = 'climate.asics_thermostat_support'
-        self.asics_climate_main = 'climate.asics_thermostat_main'
-        self.asics_climate_main_2 = 'climate.asics_thermostat_main_2'
+        self.asics_oil_support = 'climate.asics_thermostat_support'
+        self.asics_oil_main = 'climate.asics_thermostat_main'
+        self.asics_oil_main_2 = 'climate.asics_thermostat_main_2'
         
-        self.asics_main_1 = 0.1
+        self.asics_main = 0.1
         self.asics_main_2 = 0.2
         #######################################################################
         
         ####################### IP адреса асиков ###############################
         self.asic_ips = {
-            self.asics_climate_support: [133, 137],
-            self.asics_climate_main: [134, 138],
-            self.asics_climate_main_2: [135],
+            self.asics_oil_support: [133, 137],
+            self.asics_oil_main: [134, 138],
+            self.asics_oil_main_2: [135],
         }
         
         self.asic_blades = {
