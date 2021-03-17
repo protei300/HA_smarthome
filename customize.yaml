@@ -132,3 +132,5 @@ sensor.asics1_monthly:
   unit_of_measurement: кВт
 sensor.asics3_monthly:
   unit_of_measurement: кВт
+group.outside_light:
+  icon: mdi:lightbulb-group

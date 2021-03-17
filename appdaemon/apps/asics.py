@@ -76,7 +76,7 @@ class Asics(hass.Hass):
             "_ant_autodownscale_min": "400",
             "_ant_autodownscale_prec": "80",
             "_ant_autodownscale_profile": f"{profile}",
-            "_ant_minhr": "3000",
+            "_ant_minhr": "0",
             "_ant_asicboost": "true",
             "_ant_tempoff": "80",
             "_ant_altdf": "false",

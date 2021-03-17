@@ -50,7 +50,7 @@ class Settings(hass.Hass):
         self.asic_blades = {
             133: 3,
             134: 3,
-            135: 2,
+            135: 3,
             136: 1,
             137: 3,
             138: 3,
@@ -69,48 +69,53 @@ class Settings(hass.Hass):
             475: {
                     "voltage": 850,
                     "profile": 1,
-                    "consumption": 850,
+                    "consumption": 870,
                 },
             500: {
                     "voltage": 850,
                     "profile": 2,
-                    "consumption": 950,
+                    "consumption": 920,
                 },
             550: {
                     "voltage": 850,
                     "profile": 3,
-                    "consumption": 880,
+                    "consumption": 1000,
             },
             600: {
                     "voltage": 860,
                     "profile": 4,
-                    "consumption": 1000,
+                    "consumption": 1120,
             },
             631: {
                     "voltage": 860,
                     "profile": 5,
-                    "consumption": 1050,
+                    "consumption": 1170,
             },
             650: {
                     "voltage": 870,
                     "profile": 6,
-                    "consumption": 1150,
+                    "consumption": 1240,
             },
             675: {
-                    "voltage": 870,
+                    "voltage": 880,
                     "profile": 7,
-                    "consumption": 1200,
+                    "consumption": 1300,
             },
             
             700: {
                     "voltage": 890,
                     "profile": 8,
-                    "consumption": 1300,
+                    "consumption": 1380,
+            },
+            725: {
+                    "voltage": 890,
+                    "profile": 9,
+                    "consumption": 1470,
             },
             750: {
                     "voltage": 890,
                     "profile": 10,
-                    "consumption": 1500,
+                    "consumption": 1530,
             },
             775: {
                     "voltage": 900,
