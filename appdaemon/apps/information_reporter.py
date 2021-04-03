@@ -7,17 +7,19 @@ class Daily_reporter(hass.Hass):
     
     def initialize(self):
         
-        self.run_daily(self.status_report, datetime.time(18,0,0))
+        
         self.notify(f'Система успешно запустилась в {datetime.datetime.now().strftime("%y-%m-%d %H:%M")}', name = 'telegram')
         groupitem = self.get_state('group.sensor_batteries_alert', attribute = "all");
         entity_list = groupitem['attributes']['entity_id']
         self.settings = self.get_app("settings")
+        self.run_daily(self.status_report, datetime.time(18,0,0))
         self.listen_state(self.update_report, 'binary_sensor.updater', new='on')
 #        for i in entity_list:
 #	        self.log('Subscribing to state change for ' + i );
 #	        self.listen_state(self.battery_report, i);
         
     def status_report(self, kwargs):
+        
         msg = f"Время: {datetime.datetime.now().strftime(format='%Y-%m-%d %H:%M')}\n\n"
         msg += f"Температура на улице {self.settings.outside_t}\n\n"
         msg += f"Температура в бильярдной {self.get_state(self.settings.billyard_t)}\n\n"
