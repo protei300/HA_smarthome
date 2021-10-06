@@ -21,6 +21,9 @@ class Settings(hass.Hass):
         self.billyard_t = 'sensor.ble_temperature_billyard'
         
         
+        self.heater_switch = 'switch.sonoff_basic_1'
+        
+        self.heater_antifreeze = 'climate.heater_preserve_antifreeze'
         self._heater_thermostat = 'climate.heater_thermostat'
         
         ####################### Контроллеры непосредственно асиками #############
@@ -42,21 +45,23 @@ class Settings(hass.Hass):
         
         ####################### IP адреса асиков ###############################
         self.asic_ips = {
-            self.asics_oil_support: [133, 137],
-            self.asics_oil_main: [134, 138],
-            self.asics_oil_main_2: [135],
+            self.asics_oil_support: [138,],
+            self.asics_oil_main: [132, ],
+            self.asics_oil_main_2: [],
         }
         
         self.asic_blades = {
+            132: 2,
             133: 3,
             134: 3,
-            135: 3,
+            135: 2,
             136: 1,
             137: 3,
             138: 3,
         }
         
         self.asics_pwd = {
+            132: asics_pass,
             133: asics_pass,
             134: asics_pass,
             135: asics_pass,

@@ -10,7 +10,7 @@
     hot_tolerance: 0.1
     min_cycle_duration:
       seconds: 5
-    away_temp: 6
+    away_temp: 8
 
   - platform: generic_thermostat
     name: heater_preserve_antifreeze
@@ -22,8 +22,10 @@
     cold_tolerance: 7.0
     hot_tolerance: 0.0
     min_cycle_duration:
-      seconds: 30
+      seconds: 60
     away_temp: 0
+    keep_alive:
+      minutes: 10
     
     
 ################## ASICS ################################## 

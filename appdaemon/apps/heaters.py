@@ -73,13 +73,20 @@ class Set_heating_type(hass.Hass):
           self.turn_off(self.settings.oil_pump_switch)
   
     def antifreeze_pump_switch(self, entity, attribute, old, new, kwargs):
-        if (float(new) >= float(self.get_state('input_number.slider_temp_pump')) or self.get_state(self.settings.oil_pump_switch) == 'on') \
+        
+        if new.lower() in ['unavailable', 'unknown']: 
+            self.turn_on(self.settings.antifreeze_pump_switch)
+            
+        elif (self.get_state(self.settings.heater_switch) in ['on', 'unavailable'] \
+        or self.get_state(self.settings.oil_pump_switch) == 'on') \
         and self.get_state(self.settings.antifreeze_pump_switch)=='off':
-          self.turn_on(self.settings.antifreeze_pump_switch)
-        elif ( self.get_state(self.settings.oil_pump_switch) =='off' and self.get_state('switch.sonoff_basic_1') == 'off' \
+            self.turn_on(self.settings.antifreeze_pump_switch)
+        
+        elif ( self.get_state(self.settings.oil_pump_switch) =='off' \
+        and self.get_state('switch.sonoff_basic_1') == 'off' \
         and float(new) < float(self.get_state('input_number.slider_temp_pump'))) \
         and self.get_state(self.settings.antifreeze_pump_switch) == 'on':
-          self.turn_off(self.settings.antifreeze_pump_switch)       
+            self.turn_off(self.settings.antifreeze_pump_switch)       
  
  
     def change_heater_mode(self, entity, attribute, old ,new, kwargs):

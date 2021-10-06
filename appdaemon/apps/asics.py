@@ -29,7 +29,7 @@ class Asics(hass.Hass):
         self.asic_blades = self.settings.asic_blades
         
         self.log('Starting Asics module')
-        self.run_every(self.asics_auto_restart, datetime.datetime.now(), 60*5)
+        self.run_every(self.asics_auto_restart, datetime.datetime.now(), 60*8)
 
    
     def change_power(self, IP, freq, autodownscale = "false"):
@@ -45,13 +45,13 @@ class Asics(hass.Hass):
         
         data = {
             "_ant_pool1url" : "stratum+tcp://eu.ss.btc.com:1800",
-            "_ant_pool1user" : f"lakehouse.00{IP-130}",
+            "_ant_pool1user" : f"nikolaihome.00{IP-130}",
             "_ant_pool1pw" : "123",
             "_ant_pool2url" : "stratum+tcp://eu.ss.btc.com:443",
-            "_ant_pool2user" : f"lakehouse.00{IP-130}",
+            "_ant_pool2user" : f"nikolaihome.00{IP-130}",
             "_ant_pool2pw" : "123",
             "_ant_pool3url" : "stratum+tcp://eu.ss.btc.com:25",
-            "_ant_pool3user" : f"lakehouse.00{IP-130}",
+            "_ant_pool3user" : f"nikolaihome.00{IP-130}",
             "_ant_pool3pw" : "123",
             "_ant_nobeeper": "false",
             "_ant_notempoverctrl": "false",
@@ -288,7 +288,7 @@ class Asics(hass.Hass):
             result = requests.get(http_path, auth=auth)
             self.log(result.text)
             
-            if result.text.lower() == 'reboot':
+            if 'reboot' in result.text.lower():
                 return 1
             else:
                 return 0

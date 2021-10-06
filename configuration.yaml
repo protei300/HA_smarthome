@@ -32,10 +32,11 @@ system_health:
 logger:
   default: error
   logs:
-    custom_components.mitemp_bt: warning
-    homeassistant.components.xiaomi_aqara: debug
+    custom_components.mitemp_bt: error
+    homeassistant.components.xiaomi_aqara: error
     homeassistant.components.device_tracker: error
 
+history:
 
 http:
   # Secrets are defined in the file secrets.yaml
@@ -241,9 +242,6 @@ weather:
     mode: daily
     name: dark_sky
 
-media_player:
-  - platform: philips_js
-    host: 192.168.1.20
 
 
 ################# Статистика потребления ######################
@@ -290,8 +288,6 @@ utility_meter:
 
 
 ################# система качества питания сервера ######################
-binary_sensor:
-  - platform: rpi_power
 
 
 

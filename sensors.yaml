@@ -34,12 +34,12 @@
 
 
   # Настройка давления в прогнозе погоды
-- platform: template
-  sensors:
-    weather_pressure_inhg:
-      friendly_name: 'Атмосферное давление'
-      value_template: "{{(states.sensor.weather_pressure.state|float|round(1) * 0.750063)|float|round(0)}}"
-      unit_of_measurement: 'мм.рт.ст.'
+#- platform: template
+#  sensors:
+#    weather_pressure_inhg:
+#      friendly_name: 'Атмосферное давление'
+#      value_template: "{{(states.sensor.weather_pressure.state|float|round(1) * 0.750063)|float|round(0)}}"
+#      unit_of_measurement: 'мм.рт.ст.'
 
 # Настройка давления в датчике внутри дома
 - platform: template
@@ -60,7 +60,7 @@
 # Вычисление потребленных кВт*ч на котел в прошлом месяце
 - platform: template
   sensors:
-    heater_power_consum:
+    heater_power_consum_month_ago:
       friendly_name: 'Потребление за прошлый месяц на отопление'
       value_template: '{{(states.sensor.heater_was_on_month_ago.state|float * 9)|float|round(0)}}'
       unit_of_measurement: 'кВтч'

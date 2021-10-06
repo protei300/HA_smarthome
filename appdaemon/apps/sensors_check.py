@@ -9,7 +9,8 @@ class sonoff_checker(hass.Hass):
     def name_splitter(self, name):
         splitted_name = name.split('.')[1].split('_')[:-1]
         splitted_name[0] = splitted_name[0].capitalize()
-        splitted_name[1] = splitted_name[1].upper()
+        if len(splitted_name) > 1:
+            splitted_name[1] = splitted_name[1].upper()
         return "-".join(splitted_name)
     
     def initialize(self):
@@ -50,7 +51,7 @@ class sonoff_checker(hass.Hass):
         for entity in self.temp_sensors:
             if self.get_state(entity) == 'unknown':
                 self.log(f"No temp sensor located. Restarting {entity}")
-                if self.name_splitter(entity) == 'sonoff1':
+                if self.name_splitter(entity).lower() == 'sonoff1':
                     mqtt_topic = "Sonoff1/cmnd/Restart"
                 else:
                     mqtt_topic = f"cmnd/{self.name_splitter(entity)}/Restart"

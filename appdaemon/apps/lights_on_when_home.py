@@ -1,5 +1,6 @@
 import appdaemon.plugins.hass.hassapi as hass
 from datetime import datetime
+from datetime import timedelta
 #
 # Hellow World App
 #
@@ -16,13 +17,16 @@ class Lights_on_when_home(hass.Hass):
          self.status_at_home = False
      self.log("Module detection of owners is ready to work")
      self.log(f"sun now is {self.sun_down()} and group_in_home is {self.get_state('group.who_in_home')}, status_at_home = {self.status_at_home}")
-     self.log(f"Sunset at {self.sunset()}")
-     self.log(f"Sunrise at {self.sunrise()}")
+     self.log(f"Sunset at {self.sunset().time()}")
+     self.log(f"Sunrise at {(self.sunrise()+timedelta(minutes=30)).time()}")
      self.listen_state(self.we_are_home, "group.who_in_home", new = "home")
      self.listen_state(self.we_are_away, "group.who_in_home", new = "not_home",
                         duration = 2*60*60)
-     self.run_at_sunrise(self.auto_lights_perimeter_off, offset = 30*60)
-     self.run_at_sunset(self.auto_lights_perimeter_on, offset = 0)
+     self.run_daily(self.auto_lights_perimeter_off, (self.sunrise()+timedelta(minutes=30)).time())
+     self.run_daily(self.auto_lights_perimeter_on, self.sunset().time())
+     
+
+     
      
   def we_are_home(self,entity, attribute, old, new, kwargs):
       self.log(f"Owner at home at time {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} status_at_home = {self.status_at_home}")
